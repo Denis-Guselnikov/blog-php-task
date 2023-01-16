@@ -1,7 +1,8 @@
 <?php
 
 $driver = 'mysql';
-$host = 'localhost';
+$host = 'mysql';
+//$host = 'localhost';
 $db_name = 'blog-php-task';
 $db_user = 'root';
 $db_pass = '12345';
@@ -15,4 +16,4 @@ try {
     );
 } catch (PDOException $i){
     die("Ошибка подключения к базе данных");
-}
+} 

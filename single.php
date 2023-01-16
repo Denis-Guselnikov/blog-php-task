@@ -1,6 +1,6 @@
 <?php
 include "app/database/path.php";
-include "app/database/function.php";
+include "function.php";
 $topics = selectAll('topics');
 $post = selectOne('posts', ['id' => $_GET['post']]);
 ?>

@@ -1,6 +1,6 @@
 <?php
 include "app/database/path.php";
-include "app/database/function.php";
+include "function.php";
 ?>
 <!doctype html>
 <html lang="ru">

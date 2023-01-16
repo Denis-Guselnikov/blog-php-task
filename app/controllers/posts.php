@@ -1,5 +1,5 @@
 <?php
-include "app/database/function.php";
+include "function.php";
 
 $errMsg = '';
 $id = '';

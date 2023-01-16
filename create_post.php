@@ -12,7 +12,7 @@ include "app/controllers/posts.php";
 
 <body>
 
-    <?php include("app/include/header.php"); ?>
+    <?php include "app/include/header.php"; ?>
 
     <div class="container">
         <div class="posts col-9">            
