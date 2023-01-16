@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['button-reg'])) {
             $post = [
                 'admin' => $admin,
                 'username' => $login,
-                'password' => $pass,
+                'password' => $pass
             ];
             $id = insert('users', $post);
             $user = selectOne('users', ['id' => $id]);
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['button-reg'])) {
             $_SESSION['id'] = $user['id'];
             $_SESSION['login'] = $user['username'];
             $_SESSION['admin'] = $user['admin'];
-            header('location: ' . BASE_URL); // redirect                 
+            header('location: ' . BASE_URL);                 
         }
     }
 } else {

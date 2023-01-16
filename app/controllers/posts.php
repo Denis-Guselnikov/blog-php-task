@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['add_post'])) {
             'title' => $title,
             'content' => $content,
             'image' => $_POST['image'],            
-            'id_topic' => $topic,
+            'id_topic' => $topic
          ];        
          $add_post = insert('posts', $post); 
          $view_post = selectOne('posts', ['id' => $id]);

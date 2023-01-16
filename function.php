@@ -94,11 +94,10 @@ function insert($table, $params)
         }
         $i++;
     }
-
     $sql = "INSERT INTO $table ($coll) VALUES ($mask)";
 
     $query = $pdo->prepare($sql);
-    $query->execute($params);
+    $query->execute();
     dbCheckError($query);
     return $pdo->lastInsertId();
 }
@@ -108,7 +107,7 @@ function update($table, $id, $params)
 {
     global $pdo;
     $i = 0;
-    $str = '';   
+    $str = '';
     foreach ($params as $key => $value) {
         if ($i === 0) {
             $str .= $key . " = '" . $value . "'";
@@ -117,10 +116,10 @@ function update($table, $id, $params)
         }
         $i++;
     }
-
     $sql = "UPDATE $table SET $str WHERE id = $id";
+
     $query = $pdo->prepare($sql);
-    $query->execute($params);
+    $query->execute();
     dbCheckError($query);
 }
 
@@ -139,6 +138,6 @@ function getSearch($search)
 {
     global $pdo;
     return array_reverse($pdo->query(
-        "SELECT * FROM posts WHERE title LIKE '%{$search}%';")
-        ->fetchAll(PDO::FETCH_ASSOC));
+        "SELECT * FROM posts WHERE title LIKE '%{$search}%';"
+    )->fetchAll(PDO::FETCH_ASSOC));
 }
