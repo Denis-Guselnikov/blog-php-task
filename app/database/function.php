@@ -25,8 +25,8 @@ function dbCheckError($query)
 // Запрос на получение данных с одной таблицы
 function selectAll($table, $params = [])
 {
-    global $pdo;  // экземпляр класса
-    $sql = "SELECT * FROM $table";  // запрос
+    global $pdo;
+    $sql = "SELECT * FROM $table";
 
     if (!empty($params)) {
         $i = 0;
@@ -43,7 +43,7 @@ function selectAll($table, $params = [])
         }
     }
 
-    $query = $pdo->prepare($sql);   // подготовка, выполнение, возврат ошибок
+    $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);
     return $query->fetchAll();
@@ -53,8 +53,8 @@ function selectAll($table, $params = [])
 // Запрос на получение одной строки с таблицы
 function selectOne($table, $params = [])
 {
-    global $pdo;  // экземпляр класса
-    $sql = "SELECT * FROM $table";  // запрос
+    global $pdo;
+    $sql = "SELECT * FROM $table";
 
     if (!empty($params)) {
         $i = 0;
@@ -82,8 +82,8 @@ function insert($table, $params)
 {
     global $pdo;
     $i = 0;
-    $coll = ''; // Колонка
-    $mask = ''; // Строка = значение
+    $coll = '';
+    $mask = '';
     foreach ($params as $key => $value) {
         if ($i === 0) {
             $coll .= "$key";
@@ -108,7 +108,7 @@ function update($table, $id, $params)
 {
     global $pdo;
     $i = 0;
-    $str = ''; // Строка    
+    $str = '';   
     foreach ($params as $key => $value) {
         if ($i === 0) {
             $str .= $key . " = '" . $value . "'";
@@ -138,5 +138,7 @@ function delete($table, $id)
 function getSearch($search)
 {
     global $pdo;
-    return array_reverse($pdo->query("SELECT * FROM posts WHERE title LIKE '%{$search}%';")->fetchAll(PDO::FETCH_ASSOC));
+    return array_reverse($pdo->query(
+        "SELECT * FROM posts WHERE title LIKE '%{$search}%';")
+        ->fetchAll(PDO::FETCH_ASSOC));
 }
