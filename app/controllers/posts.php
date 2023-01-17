@@ -42,8 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['add_post'])) {
         'id_topic' => $topic
         ]; 
             
-        $add_post = insert('posts', $post); 
-        $view_post = selectOne('posts', ['id' => $id]);
+        $add_post = insert('posts', $post);         
         header('location: ' . BASE_URL);         
     }
 } else {

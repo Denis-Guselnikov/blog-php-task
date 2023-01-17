@@ -1,10 +1,11 @@
 <?php
 include "app/database/path.php";
 include "function.php";
-$posts = selectAll('posts', ['id_topic' => $_GET['id']]);
 $topics = selectAll('topics');
 $topic = selectOne('topics', ['id' => $_GET['id']]);
+$posts = topicsWithUsersWithPosts('posts', 'users', $_GET['id']);
 ?>
+
 <!doctype html>
 <html lang="ru">
 
@@ -29,10 +30,9 @@ $topic = selectOne('topics', ['id' => $_GET['id']]);
                         </div>
                         <!-- описание -->
                         <div class="post-text col-12 col-md-8">
-                            <h5><a href="<?= BASE_URL . 'single.php?post=' . $post['id']; ?>"><?= $post['title']; ?></a></h5>
-                            <i class="far fa-user">ID Автора: <?= $post['id_user']; ?> -- </i>
-                            <i class="far fa-calendar">Дата: <?= $post['created']; ?> -- </i>
-                            <i class="far fa-topic">ID Темы: <?= $post['id_topic']; ?></i>
+                            <h5><a href="<?= BASE_URL . 'single.php?post=' . $post['id_post']; ?>"><?= $post['title']; ?></a></h5>
+                            <i class="far fa-user">Автор: <?= $post['username']; ?> -- </i>
+                            <i class="far fa-calendar">Дата: <?= $post['created']; ?></i>                            
                             <p class="preview-text"><?= $post['content']; ?></p>
                         </div>
                     </div>

@@ -1,8 +1,8 @@
 <?php
 
 $driver = 'mysql';
-// $host = 'mysql';
-$host = 'localhost';
+$host = 'mysql';
+// $host = 'localhost';
 $db_name = 'blog-php-task';
 $db_user = 'root';
 $db_pass = '12345';

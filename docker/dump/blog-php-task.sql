@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 15 2023 г., 19:59
+-- Время создания: Янв 17 2023 г., 17:16
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `posts` (
-  `id` int NOT NULL,
+  `id_post` int NOT NULL,
   `id_user` int DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
@@ -41,13 +41,14 @@ CREATE TABLE `posts` (
 -- Дамп данных таблицы `posts`
 --
 
-INSERT INTO `posts` (`id`, `id_user`, `title`, `image`, `content`, `created`, `id_topic`) VALUES
-(16, 32, 'Пост 1', '', 'Пост 1', '2023-01-15 17:51:03', 1),
-(17, 32, 'Пост 2', '', 'Пост 2', '2023-01-15 17:51:21', 2),
-(18, 32, 'Пост 3', '', 'Пост 3', '2023-01-15 17:51:32', 3),
-(19, 32, 'Пост 4', '', 'Пост 4', '2023-01-15 17:51:40', 4),
-(20, 32, 'Пост 5', '', 'Пост 5', '2023-01-15 17:52:10', 1),
-(21, 32, 'Пост 6', '', 'Пост 6', '2023-01-15 17:52:25', 2);
+INSERT INTO `posts` (`id_post`, `id_user`, `title`, `image`, `content`, `created`, `id_topic`) VALUES
+(38, 32, 'Пост 1', '1.jpg', 'Пост 1', '2023-01-17 12:16:54', 1),
+(39, 32, 'Пост 2', '2.jpg', 'Пост 2', '2023-01-17 12:17:21', 2),
+(40, 32, 'Пост 3', '3.png', 'Пост 3', '2023-01-17 12:17:58', 3),
+(41, 32, 'Пост 4', '4.jpg', 'Пост 4', '2023-01-17 12:18:31', 4),
+(42, 32, 'Пост 5', '5.jpg', 'Пост 5', '2023-01-17 12:19:13', 1),
+(43, 32, 'Пост 6', '6.jpg', 'Пост 6', '2023-01-17 12:19:45', 2),
+(51, 42, 'Пост 7', '7.png', 'Пост 7', '2023-01-17 17:14:25', 3);
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `admin`, `username`, `password`, `created`) VALUES
-(32, 0, 'denis', '$2y$10$4eWlvhB85ayd.WA18CgRpOPgSCSBFU/khWB.DLuqTorcZWCa9gkDq', '2023-01-14 16:21:57');
+(32, 0, 'denis', '$2y$10$4eWlvhB85ayd.WA18CgRpOPgSCSBFU/khWB.DLuqTorcZWCa9gkDq', '2023-01-14 16:21:57'),
+(42, 0, 'Inna', '$2y$10$GvJ7ZxvPCgOrIA7yfRVSbOvhPCEU5Md0CWsjrkb3DGvtu5l/9UIce', '2023-01-17 10:21:06');
 
 --
 -- Индексы сохранённых таблиц
@@ -100,9 +102,7 @@ INSERT INTO `users` (`id`, `admin`, `username`, `password`, `created`) VALUES
 -- Индексы таблицы `posts`
 --
 ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_topic` (`id_topic`),
-  ADD KEY `id_user` (`id_user`);
+  ADD PRIMARY KEY (`id_post`);
 
 --
 -- Индексы таблицы `topics`
@@ -125,30 +125,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_post` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT для таблицы `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- Ограничения внешнего ключа сохраненных таблиц
---
-
---
--- Ограничения внешнего ключа таблицы `posts`
---
-ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`id_topic`) REFERENCES `topics` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

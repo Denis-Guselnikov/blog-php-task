@@ -133,11 +133,47 @@ function delete($table, $id)
     dbCheckError($query);
 }
 
-// Для Поиска
+// Выборка для Поиска
 function getSearch($search)
 {
     global $pdo;
     return array_reverse($pdo->query(
-        "SELECT * FROM posts WHERE title LIKE '%{$search}%';"
+        "SELECT * FROM posts JOIN topics ON posts.id_topic = topics.id
+        JOIN users ON posts.id_user = users.id WHERE title LIKE '%{$search}%';"
     )->fetchAll(PDO::FETCH_ASSOC));
+}
+
+// Выборка из таблиц: posts, users, topics 
+function postssWithTopicsWithUsers($table1, $table2, $table3)
+{
+    global $pdo;
+    $sql = "SELECT * FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_topic = t2.id
+            JOIN $table3 AS t3 ON t1.id_user = t3.id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}
+
+// Выборка 1 поста с автором и категорией
+function singlePostssWithTopicsWithUsers($table1, $table2, $table3, $id)
+{
+    global $pdo;
+    $sql = "SELECT * FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_topic = t2.id
+            JOIN $table3 AS t3 ON t1.id_user = t3.id WHERE t1.id_post=$id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetch();
+}
+
+// Выборка категорий с автором
+function topicsWithUsersWithPosts($table1, $table2, $id)
+{
+    global $pdo;
+    $sql = "SELECT * FROM $table1 AS t1 JOIN $table2 AS t3 ON t1.id_user = t3.id WHERE t1.id_topic=$id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
 }

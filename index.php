@@ -1,8 +1,8 @@
 <?php
 include "app/database/path.php";
 include "function.php";
-$posts = selectAll('posts');
 $topics = selectAll('topics');
+$posts = postssWithTopicsWithUsers('posts', 'topics', 'users');
 ?>
 <!doctype html>
 <html lang="ru">
@@ -28,10 +28,10 @@ $topics = selectAll('topics');
                         </div>
                         <!-- описание -->
                         <div class="post-text col-12 col-md-8">
-                            <h5><a href="<?= BASE_URL . 'single.php?post=' . $post['id']; ?>"><?= $post['title']; ?></a></h5>
-                            <i class="far fa-user">ID Автора: <?= $post['id_user']; ?> -- </i>
+                            <h5><a href="<?= BASE_URL . 'single.php?post=' . $post['id_post']; ?>"><?= $post['title']; ?></a></h5>
+                            <i class="far fa-user">Автор: <?= $post['username']; ?> -- </i>
                             <i class="far fa-calendar">Дата: <?= $post['created']; ?> -- </i>
-                            <i class="far fa-topic">ID Темы: <?= $post['id_topic']; ?></i>
+                            <i class="far fa-topic">Тема: <?= $post['name']; ?></i>
                             <p class="preview-text"><?= $post['content']; ?></p>
                         </div>
                     </div>

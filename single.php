@@ -2,7 +2,7 @@
 include "app/database/path.php";
 include "function.php";
 $topics = selectAll('topics');
-$post = selectOne('posts', ['id' => $_GET['post']]);
+$post = singlePostssWithTopicsWithUsers('posts', 'topics', 'users', $_GET['post']);
 ?>
 
 <!doctype html>
@@ -27,9 +27,9 @@ $post = selectOne('posts', ['id' => $_GET['post']]);
                         <img src="<?=BASE_URL . 'static/image/posts/' . $post['image']; ?>" alt="" class="img-thumbnail">
                     </div>
                     <div class="single-post-info">
-                        <i class="far fa-user">ID Автора: <?= $post['id_user']; ?> -- </i>
-                        <i class="far fa-calendar">Дата: <?= $post['created']; ?> -- </i>
-                        <i class="far fa-topic">ID Темы: <?= $post['id_topic']; ?></i>
+                        <i class="far fa-user">Автор: <?= $post['username']; ?></i>
+                        <i class="far fa-calendar">Дата: <?= $post['created']; ?></i>
+                        <i class="far fa-topic">Тема: <?= $post['name']; ?></i>
                     </div>
                     <div class="single-post-text col-12">
                         <p class="preview-text"><?= $post['content']; ?></p>
