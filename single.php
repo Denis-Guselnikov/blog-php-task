@@ -24,7 +24,7 @@ $post = selectOne('posts', ['id' => $_GET['post']]);
                 <div class="single-post row">
                     <!-- картинка -->
                     <div class="img col-12">
-                        <img src="static/image/6.jpg" alt="" class="img-thumbnail">
+                        <img src="<?=BASE_URL . 'static/image/posts/' . $post['image']; ?>" alt="" class="img-thumbnail">
                     </div>
                     <div class="single-post-info">
                         <i class="far fa-user">ID Автора: <?= $post['id_user']; ?> -- </i>

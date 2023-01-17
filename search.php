@@ -26,7 +26,7 @@ include "function.php";
                     <div class="post row">
                         <!-- картинка -->
                         <div class="img col-12 col-md-4">
-                            <img src="static/image/6.jpg" alt="" class="img-thumbnail">
+                            <img src="<?=BASE_URL . 'static/image/posts/' . $post['image']; ?>" alt="" class="img-thumbnail">
                         </div>
                         <!-- описание -->
                         <div class="post-text col-12 col-md-8">
