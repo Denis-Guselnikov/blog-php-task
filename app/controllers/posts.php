@@ -10,7 +10,7 @@ $topic = '';
 
 
 // Код для формы создания записи
-if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['add_post'])) {
+if ($_SESSION['id'] and $_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['add_post'])) {
 
     if (!empty($_FILES['image']['name'])) {
         $imgName = $_FILES['image']['name'];
@@ -24,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['add_post'])) {
             $errMsg = 'Не загрузилась картинка';
         }
     }
-
-    $title = trim($_POST['title']);
-    $content = trim($_POST['content']);
+    
+    $title = htmlspecialchars(trim($_POST['title']));
+    $content = htmlspecialchars(trim($_POST['content']));    
     $topic = trim($_POST['topic']);
 
     if ($title === '' or $content === '' or $topic === '') {
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['add_post'])) {
         $add_post = insert('posts', $post);         
         header('location: ' . BASE_URL);         
     }
-} else {
+} else {    
     $title = '';
     $content = '';
     $img = '';

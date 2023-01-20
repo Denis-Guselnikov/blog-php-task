@@ -86,16 +86,16 @@ function insert($table, $params)
     $mask = '';
     foreach ($params as $key => $value) {
         if ($i === 0) {
-            $coll .= "$key";
+            $coll .= "`" . "$key" . "`";
             $mask .= "'" . "$value" . "'";
         } else {
-            $coll .= ", $key";
+            $coll .= "," . " `" . "$key" . "`";
             $mask .= ", '" . "$value" . "'";
         }
         $i++;
     }
     $sql = "INSERT INTO $table ($coll) VALUES ($mask)";
-
+        
     $query = $pdo->prepare($sql);
     $query->execute();
     dbCheckError($query);

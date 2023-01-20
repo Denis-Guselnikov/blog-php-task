@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 17 2023 г., 17:16
+-- Время создания: Янв 20 2023 г., 10:03
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
@@ -48,7 +48,8 @@ INSERT INTO `posts` (`id_post`, `id_user`, `title`, `image`, `content`, `created
 (41, 32, 'Пост 4', '4.jpg', 'Пост 4', '2023-01-17 12:18:31', 4),
 (42, 32, 'Пост 5', '5.jpg', 'Пост 5', '2023-01-17 12:19:13', 1),
 (43, 32, 'Пост 6', '6.jpg', 'Пост 6', '2023-01-17 12:19:45', 2),
-(51, 42, 'Пост 7', '7.png', 'Пост 7', '2023-01-17 17:14:25', 3);
+(51, 42, 'Пост 7', '7.png', 'Пост 7', '2023-01-17 17:14:25', 3),
+(63, 32, '&lt;h1&gt;xss-Атака&lt;/h1&gt;', '1.jpg', '&lt;h1&gt;xss-Атака&lt;/h1&gt;', '2023-01-20 09:32:02', 4);
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id_post` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_post` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT для таблицы `topics`
@@ -137,7 +138,7 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

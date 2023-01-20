@@ -6,7 +6,7 @@ $errMsg = '';
 
 // Для формы регистрации
 if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['button-reg'])) {
-    $admin = 0;
+    $admin = 0;    
     $login = trim($_POST['login']);
     $password1 = trim($_POST['password1']);
     $password2 = trim($_POST['password2']);
@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['button-reg'])) {
         $errMsg = 'Логин не может быть меньше 4 символов!!!';
     } elseif ($password1 !== $password2) {
         $errMsg = 'Пароли не похожи!!!';
+    } elseif (!preg_match("/^[a-zA-Z0-9]+$/", $login)) {
+        $errMsg = 'Только латинские буквы и цифры!!!';
     } else {
         $existLogin = selectOne('users', ['username' => $login]);
         if ($existLogin['username'] === $login) {
@@ -28,13 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['button-reg'])) {
                 'username' => $login,
                 'password' => $pass
             ];
+
             $id = insert('users', $post);
             $user = selectOne('users', ['id' => $id]);
 
             $_SESSION['id'] = $user['id'];
             $_SESSION['login'] = $user['username'];
             $_SESSION['admin'] = $user['admin'];
-            header('location: ' . BASE_URL);                 
+            header('location: ' . BASE_URL);
         }
     }
 } else {
@@ -49,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and isset($_POST['button-log'])) {
 
     if ($login === '' or $password === '') {
         $errMsg = 'Не все поля заполнены!!!';
+    } elseif (!preg_match("/^[a-zA-Z0-9]+$/", $login)) {
+        $errMsg = 'Только латинские буквы и цифры!!!';
     } else {
         $existLogin = selectOne('users', ['username' => $login]);
         if ($existLogin and password_verify($password, $existLogin['password'])) {
